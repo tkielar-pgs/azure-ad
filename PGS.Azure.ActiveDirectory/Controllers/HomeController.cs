@@ -13,6 +13,9 @@ namespace PGS.Azure.ActiveDirectory.Controllers
         [Authorize]
         public IActionResult Profile() => View(User.Claims);
 
+        [Authorize(Roles = "Administrator")]
+        public IActionResult Admin() => View();
+
         public IActionResult SignIn() => Challenge(new AuthenticationProperties {RedirectUri = Url.Action(nameof(Profile))});
 
         public IActionResult SignOut() => SignOut(new AuthenticationProperties
